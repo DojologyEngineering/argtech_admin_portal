@@ -1,0 +1,9 @@
+# unrs-resolver ships the native module eslint-config-next's import resolver
+# needs, so its build script has to be allowed to run.
+allowBuilds:
+  unrs-resolver: true
+
+# lucide-react 1.42.0 is newer than pnpm's default minimum release age; it is
+# the version this project was built against, so it is excluded from that gate.
+minimumReleaseAgeExclude:
+  - lucide-react@1.42.0

@@ -1,26 +1,200 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-softer: var(--brand-softer);
+  /* Wide tables and the five-card dashboard row need about 1360px beside the sidebar. */
+  --breakpoint-xl: 85rem;
+  /* Corner scale: controls 12px, cards 16px, dialogs and popovers 20px. */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.05);
+  --shadow-pop: 0 2px 6px rgba(15, 23, 42, 0.06), 0 16px 40px rgba(15, 23, 42, 0.12);
+  --color-hover-tint: var(--hover-tint);
+  --color-divider: var(--divider);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/*
+ * ARG TECH palette: one green accent (#06642b) on a light neutral canvas.
+ * Cards are white and separated by a soft shadow instead of a border; the only
+ * dividers are very light.
+ */
+:root {
+  --background: #f5f7f5;
+  --foreground: #16201a;
+  --card: #ffffff;
+  --card-foreground: #16201a;
+  --popover: #ffffff;
+  --popover-foreground: #16201a;
+  --primary: #06642b;
+  --primary-foreground: #ffffff;
+  --secondary: #eef2ef;
+  --secondary-foreground: #1d4a2f;
+  --muted: #f0f3f1;
+  --muted-foreground: #5a6760; /* 5.6:1 on white, 5.1:1 on the page background */
+  --accent: #f3f8f4;
+  --accent-foreground: #0a4d22;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #eef0ee;
+  --divider: #eef0ee;
+  --input: #d5dbd7;
+  --ring: #06642b;
+  --hover-tint: #f3f8f4;
+  --brand-soft: #e6f2ea;
+  --brand-softer: #f3f8f4;
+  --chart-1: #06642b;
+  --chart-2: #2f8a52;
+  --chart-3: #66ad82;
+  --chart-4: #98c9ac;
+  --chart-5: #c4e0cf;
+  /* Base radius: the 12px used by buttons, inputs and selects. */
+  --radius: 0.75rem;
+  --sidebar: oklch(0.318 0.072 155);
+  --sidebar-foreground: oklch(0.93 0.018 150);
+  --sidebar-primary: oklch(0.42 0.095 154);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.395 0.085 154);
+  --sidebar-accent-foreground: oklch(0.99 0 0);
+  --sidebar-border: oklch(0.385 0.062 154);
+  --sidebar-ring: oklch(0.62 0.09 152);
+}
+
+.dark {
+  --divider: oklch(1 0 0 / 8%);
+  --hover-tint: oklch(0.26 0.03 155);
+  --background: oklch(0.168 0.014 160);
+  --foreground: oklch(0.955 0.006 150);
+  --card: oklch(0.222 0.018 160);
+  --card-foreground: oklch(0.955 0.006 150);
+  --popover: oklch(0.222 0.018 160);
+  --popover-foreground: oklch(0.955 0.006 150);
+  --primary: oklch(0.68 0.128 152);
+  --primary-foreground: oklch(0.17 0.03 155);
+  --secondary: oklch(0.278 0.022 158);
+  --secondary-foreground: oklch(0.955 0.006 150);
+  --muted: oklch(0.278 0.022 158);
+  --muted-foreground: oklch(0.712 0.018 152);
+  --accent: oklch(0.305 0.038 155);
+  --accent-foreground: oklch(0.955 0.006 150);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.68 0.128 152);
+  --brand-soft: oklch(0.305 0.038 155);
+  --brand-softer: oklch(0.262 0.028 156);
+  --chart-1: oklch(0.68 0.128 152);
+  --chart-2: oklch(0.6 0.11 152);
+  --chart-3: oklch(0.52 0.095 152);
+  --chart-4: oklch(0.44 0.08 152);
+  --chart-5: oklch(0.36 0.065 152);
+  --sidebar: oklch(0.212 0.028 158);
+  --sidebar-foreground: oklch(0.93 0.012 150);
+  --sidebar-primary: oklch(0.42 0.095 154);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.315 0.045 155);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.62 0.09 152);
+}
+
+/* A white card: rounded 16px, soft shadow, no border. */
+@utility card-surface {
+  border-radius: var(--radius-xl);
+  background-color: var(--card);
+  color: var(--card-foreground);
+  box-shadow: var(--shadow-card);
+}
+
+/* Floating surfaces: popovers, menus and dialogs. */
+@utility pop-surface {
+  background-color: var(--popover);
+  color: var(--popover-foreground);
+  box-shadow: var(--shadow-pop);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "tnum" 0;
+  }
+  /* Smooth hover and focus changes everywhere without per-component rules. */
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    transition-property: color, background-color, border-color, box-shadow, opacity;
+    transition-duration: 150ms;
+  }
+  html {
+    @apply font-sans;
+  }
+  /* Native date inputs should adopt the app's control styling. */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.55;
   }
 }
 
-body {
-  background: var(--background);
+/* Leaflet overrides so the map reads as part of the design system. */
+.leaflet-container {
+  font-family: inherit;
+  background: var(--muted);
+  z-index: 0;
+}
+.leaflet-container a.leaflet-popup-close-button {
+  color: var(--muted-foreground);
+}
+.leaflet-bar a,
+.leaflet-control-layers-toggle {
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+.leaflet-control-attribution {
+  font-size: 10px;
 }
